@@ -22,6 +22,21 @@ def lorentz(E,W,V):
     return lor
 
 
+# In[12]:
+
+def dos_electrodes(bias,a_t,a_s,V):
+    n_steps=V.size
+    dos=numpy.zeros(n_steps)
+    e_tip=0
+    e_sample=0
+    
+    e_tip=e_tip-(bias*a_t)
+    e_sample=e_sample+(bias*a_s)
+    
+    dos=((V-e_tip)<0)
+    return dos
+
+
 ### Parameters
 
 # In[2]:
@@ -65,10 +80,15 @@ E_block=0
 
 ### Main
 
-# In[7]:
+# In[ ]:
 
-plt.plot(V,dos)
-plt.show()
+for i in xrange(0,n_steps):
+    tip=dos_electrodes(V[i],Alpha_1,Alpha_2,V)
+
+
+# In[24]:
+
+
 
 
 # In[ ]:
